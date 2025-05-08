@@ -10,8 +10,15 @@
   <script src="./node_modules/gsap/dist/gsap.min.js"></script>
 </head>
 <body>
+  <!-- preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+    <div class="loading-preload">JUST A MOMENT</div>
+  </div>
+  <!-- main content -->
   <div class="container">
-    <video src="/vid/bg-video-1.mp4" autoplay loop muted ></video>
+    <div class="bg-blur"></div>
+    <video src="/vid/PORTFOLIO-VID-BG.mp4" autoplay loop muted></video>
     <div class="wrapper">
       <div class="content">
         <div class="nav">
@@ -37,30 +44,105 @@
       <div class="loading-text">
         <div class="details">
           <span class="dd2">Hello,</span>
-          <br><br>
-          <p class="dd">
-            I am <b class="name">Subham Debnath.</b>
-          </p>
-          <p class="dd">
-            A passionate <b class="name">UI Designer</b> and <br>
-            <b class="name">Front End Developer.</b>
-          </p><br>
+          <span class="dd">
+            I am <b class="name">Subham Debnath,</b>
+          </span>
+          <span class="dd">
+            A passionate <b class="name">UI Designer</b> and <b class="name">Front End Developer.</b>
+          </span>
+          <br>
           <p class="desc">
             Full-time learner, part-time UI wizard.
           </p>
           <p class="desc">
             My side hustle is to teach websites how to behave.
           </p>
+          <br>
           <p class="desc">
               <a href="https://www.linkedin.com/in/subhamdebnath2000/" target="_blank"><span class="bi bi-linkedin"></span></a>
               <a href="https://github.com/SDebnath001" target="_blank"><span class="bi bi-github"></span></a>
-              <a href="mailto:debnathsubham957@gmail.com" target="_blank"><span class="bi bi-envelope-fill"></span></a>
+              <a href="mailto:debnathsubham957@gmail.com" target="_blank"><button class="hire-btn">Hire Me</button></a>
           </p>
         </div> 
       </div>
     </div>
   </div>
   <script>
+    window.addEventListener("load", () => {
+      document.getElementById("preloader").style.display = "none";
+    });
+
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    function isVisited() {
+      document.querySelector('.loading').style.opacity = "1" , document.querySelector('.loading').style.color = "white", document.querySelector('.loading').style.transform = "translate(-50%, 0%)";
+      document.querySelector('.loading-text').style.scale = "1.2";
+      document.querySelectorAll('.name').forEach(el => el.style.color = "#FB6000");
+      document.querySelectorAll('.desc').forEach(el => el.style.opacity = "1");
+      document.querySelector('.nav').style.right = "0";
+      document.querySelector('.block-left').style.left = "-50%";
+      document.querySelector('.block-right').style.right = "-50%";
+    }
+    if (!hasVisited) {
+      sessionStorage.setItem('hasVisited', 'true');
+      const tl = gsap.timeline();
+  
+      tl.from('.loading', {
+          opacity: 0,
+          ease: "power4.inOut",
+          duration: 0.8,
+          delay: 0.3
+      });
+      tl.from('.dd', {
+          opacity: 0,
+          ease: "back.inOut(0.7)",
+          stagger: 0.2,
+          duration: 0.7
+      });
+      tl.to('.loading-text', {
+          color: "#ffffff",
+          ease: "power3.inOut",
+          scale: 1.2,
+      });
+      tl.to('.name', {
+        color: "#FB6000",
+        ease: "expo.inOut",
+        stagger: 0.3
+      });
+  
+      gsap.from('.desc', {
+        scale: 0,
+        opacity: 0,
+        stagger: 0.2,
+        delay: 1.7,
+        stagger: 0.4,
+        color: "#000"
+      });
+      gsap.to('.block-left', {
+        duration: 1.1,
+        left: "-50%",
+        ease: "circ.inOut",
+        delay: 1.8
+      });
+      gsap.to('.block-right', {
+        duration: 1.1,
+        right: "-50%",
+        ease: "circ.inOut",
+        delay: 1.8
+      });
+      gsap.from('.nav-item', {
+        duration: 1,
+        opacity: 0,
+        y: "50%",
+        ease: "back.inOut(2.3)",
+        delay: 1.9,
+        stagger: 0.2
+      });
+    } else {
+      isVisited();
+    }
+  </script>
+  
+  <!-- <script>
     var tl = gsap.timeline();
 
     tl.from('.loading', {
@@ -110,7 +192,7 @@
       ease: "back.inOut(2.3)",
       delay: 1.9
     })
-  </script>
+  </script> -->
   <script src="./src/main.js"></script>
 </body>
 </html>

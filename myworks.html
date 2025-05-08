@@ -10,6 +10,12 @@
     <script src="./node_modules/gsap/dist/gsap.min.js"></script>
 </head>
 <body>
+    <!-- preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+    <div class="loading-preload">JUST A MOMENT</div>
+  </div>
+  <!-- main content -->
     <div class="works" >
         <nav class="work-nav">
             <div class="MYname">
@@ -52,6 +58,26 @@
         </div>
     </div>
     <script>
+        const preloader = document.getElementById("preloader");
+        window.addEventListener("load", () => {
+            preloader.style.display = "none";
+        });
+        const hasVisited = sessionStorage.getItem('hasVisited');
+        if (hasVisited) {
+            sessionStorage.setItem('hasVisited', 'true');
+            let workImg = document.querySelectorAll(".imgs");
+            gsap.from('.work-nav', {
+                y: "-40",
+                opacity: 0,
+                ease: "power4.inOut",
+                duration: 0.5,
+                delay: 0.3
+            })
+            
+        } else {
+
+        }
+
         
     </script>
     <script src="./src/main.js"></script>
