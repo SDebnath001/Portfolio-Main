@@ -82,7 +82,7 @@
       document.querySelector('.block-left').style.left = "-50%";
       document.querySelector('.block-right').style.right = "-50%";
     }
-    if (!hasVisited) {
+    if (hasVisited) {
       sessionStorage.setItem('hasVisited', 'true');
       const tl = gsap.timeline();
   
